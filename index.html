@@ -14,16 +14,14 @@
 <body ng-app="tttApp">
 {{2+2}}
    <div id="container" ng-controller="TTTController as tttCtrl">
-       <div class="box" id="box1"></div>
-       <div class="box" id="box2"></div>
-       <div class="box" id="box3"></div>
-       <div class="box" id="box4"></div>
-       <div class="box" id="box5"></div>
-       <div class="box" id="box6"></div>
-       <div class="box" id="box7"></div>
-       <div class="box" id="box8"></div>
-       <div class="box" id="box9"></div>
+
+      <div ng-repeat="boxes in tttCtrl.boxes">
+        <!-- <div class="board"> -->
+        <button class="box" ng-class="boxes.select" ng-click="tttCtrl.clickedBox($index)">{{boxes.box}}</button>
+      
    </div>
+  </div>
+
   
 </body>
 </html>
