@@ -1,3 +1,7 @@
+h1 {
+   font-family: tahoma;
+   text-align: center ;
+}
 * {
    box-sizing: border-box;
 }
