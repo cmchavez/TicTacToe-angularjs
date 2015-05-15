@@ -39,7 +39,7 @@ function TTTController($firebaseArray) {
 		self.turn = "o";
 		self.addBox.$save(c);
 		}  	else {
-		null
+	
 
 		}
 		getWinner()
@@ -52,25 +52,25 @@ function TTTController($firebaseArray) {
 			console.log(self.addBox[0].box + "won"); 
 		} else if ((self.addBox[3].box === "x" && self.addBox[4].box === "x" && self.addBox[5].box === "x") 
 			|| (self.addBox[3].box === "o" && self.addBox[4].box === "o" && self.addBox[5].box === "o")) {
-			console.log(self.addBox[0].box + "won"); 
+			console.log(self.addBox[3].box + "won"); 
 		} else if ((self.addBox[6].box === "x" && self.addBox[7].box === "x" && self.addBox[8].box === "x") 
 			|| (self.addBox[6].box === "o" && self.addBox[7].box === "o" && self.addBox[8].box === "o")) {
-			console.log(self.addBox[0].box + "won");
+			console.log(self.addBox[6].box + "won");
 		} else if ((self.addBox[0].box === "x" && self.addBox[3].box === "x" && self.addBox[6].box === "x") 
 			|| (self.addBox[0].box === "o" && self.addBox[3].box === "o" && self.addBox[6].box === "o")) {
 			console.log(self.addBox[0].box + "won"); 
 		} else if ((self.addBox[1].box === "x" && self.addBox[4].box === "x" && self.addBox[7].box === "x") 
 			|| (self.addBox[1].box === "o" && self.addBox[4].box === "o" && self.addBox[7].box === "o")) {
-			console.log(self.addBox[0].box + "won"); 
+			console.log(self.addBox[1].box + "won"); 
 		} else if ((self.addBox[2].box === "x" && self.addBox[5].box === "x" && self.addBox[8].box === "x") 
 			|| (self.addBox[2].box === "o" && self.addBox[5].box === "o" && self.addBox[8].box === "o")) {
-			console.log(self.addBox[0].box + "won"); 
+			console.log(self.addBox[2].box + "won"); 
 		} else if ((self.addBox[0].box === "x" && self.addBox[4].box === "x" && self.addBox[8].box === "x") 
 			|| (self.addBox[0].box === "o" && self.addBox[4].box === "o" && self.addBox[8].box === "o")) {
 			console.log(self.addBox[0].box + "won"); 
 		} else if ((self.addBox[2].box === "x" && self.addBox[4].box === "x" && self.addBox[6].box === "x") 
 			|| (self.addBox[2].box === "o" && self.addBox[4].box === "o" && self.addBox[6].box === "o")) {
-			console.log(self.addBox[0].box + "won"); 
+			console.log(self.addBox[2].box + "won"); 
 		}	
 	} 
 
