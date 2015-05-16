@@ -12,13 +12,14 @@
   </head>
   <body>
     <h1>Let's Play Tic Tac Toe!</h1>
-  {{2+2}}
+
       <div id="container" ng-controller="TTTController as tttCtrl">
-        <div ng-repeat="boxes in tttCtrl.addBox">
+        <div ng-repeat="boxes in tttCtrl.letsPlay">
           <button class="box" ng-class="boxes.box" ng-click="tttCtrl.clickedBox($index)">{{boxes.box}}</button>
           
         </div>
         <button type="button" ng-click="tttCtrl.restart()">Restart</button>
+        
       </div>
 
   </body>

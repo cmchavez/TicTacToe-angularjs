@@ -6,82 +6,86 @@ TTTController.$inject = ['$firebaseArray'];
 
 function TTTController($firebaseArray) {
 	var self = this;
-	self.clickedBox = clickedBox;
-	self.player1 = "x";
-	self.player2 = "o";
-	self.turn = "o";
-	self.addBox = getBox();
-	self.restart = restart;
-	self.getWinner = getWinner;
-	
-	self.addBox.$loaded( function() {
-		if (self.addBox.length < 9) {
-			for (var i = 0; i < 9; i++) {
-		self.addBox.$add({box: ''});
-		}
-	}	
-	});
-	//linking to firebase	
-	function getBox() {
-		var ref = new Firebase("https://tictactoby.firebaseio.com/");
-		var box = $firebaseArray(ref);
-		return box;
-	}
-	//allowing box to be clicked by player if empty. 
-	//also switching player and saving
-	function clickedBox(c) {
-		if (self.addBox[c].box == '' && self.turn == "o") {
-		 self.addBox[c].box = "x";
-		 self.turn = "x";
-		 self.addBox.$save(c);
-		}	else if (self.addBox[c].box == '' && self.turn == "x") {
-		self.addBox[c].box = "o";
-		self.turn = "o";
-		self.addBox.$save(c);
-		}  	else {
-	
+    self.gameInfo = gameInfo();
+    self.letsPlay = letsPlay();
+    self.clickedBox = clickedBox;
+    self.table = gameInfo();
+    self.restart = restart;
+    self.getWinner = getWinner;
 
-		}
+
+	//linking to firebase	
+	function gameInfo() {
+		var ref = new Firebase("https://tictactoby.firebaseio.com/Table");
+		var game = $firebaseArray(ref);
+		return game;
+	}
+	function letsPlay() {
+		var ref = new Firebase("https://tictactoby.firebaseio.com/GameBoard");
+		var boxes = $firebaseArray(ref);
+		return boxes;
+	}
+//determine
+	function clickedBox(c) { 
+		// console.log(self.gameInfo[0].turn)
+		if (self.letsPlay[c].box == '' && self.gameInfo[0].turn == "o") {
+		 	self.letsPlay[c].box = "x";
+		 	self.gameInfo[0].turn = "x";
+		 	self.letsPlay.$save(c);
+		 	self.gameInfo.$save(self.gameInfo[0]);
+		 	console.log(self.gameInfo[0].turn);
+		} else if (self.letsPlay[c].box == '' && self.gameInfo[0].turn == "x") {
+			self.letsPlay[c].box = "o";
+			self.gameInfo[0].turn = "o";
+			self.letsPlay.$save(c);
+			self.gameInfo.$save(self.gameInfo[0]);
+			console.log(self.gameInfo[0].turn);
+		}  	
 		getWinner()
 	}
-	//this code block will determine winner
-	function getWinner() {
-		console.log("getWinner function is running")
-		if ((self.addBox[0].box === "x" && self.addBox[1].box === "x" && self.addBox[2].box === "x") 
-			|| (self.addBox[0].box === "o" && self.addBox[1].box === "o" && self.addBox[2].box === "o")) {
-			console.log(self.addBox[0].box + "won"); 
-		} else if ((self.addBox[3].box === "x" && self.addBox[4].box === "x" && self.addBox[5].box === "x") 
-			|| (self.addBox[3].box === "o" && self.addBox[4].box === "o" && self.addBox[5].box === "o")) {
-			console.log(self.addBox[3].box + "won"); 
-		} else if ((self.addBox[6].box === "x" && self.addBox[7].box === "x" && self.addBox[8].box === "x") 
-			|| (self.addBox[6].box === "o" && self.addBox[7].box === "o" && self.addBox[8].box === "o")) {
-			console.log(self.addBox[6].box + "won");
-		} else if ((self.addBox[0].box === "x" && self.addBox[3].box === "x" && self.addBox[6].box === "x") 
-			|| (self.addBox[0].box === "o" && self.addBox[3].box === "o" && self.addBox[6].box === "o")) {
-			console.log(self.addBox[0].box + "won"); 
-		} else if ((self.addBox[1].box === "x" && self.addBox[4].box === "x" && self.addBox[7].box === "x") 
-			|| (self.addBox[1].box === "o" && self.addBox[4].box === "o" && self.addBox[7].box === "o")) {
-			console.log(self.addBox[1].box + "won"); 
-		} else if ((self.addBox[2].box === "x" && self.addBox[5].box === "x" && self.addBox[8].box === "x") 
-			|| (self.addBox[2].box === "o" && self.addBox[5].box === "o" && self.addBox[8].box === "o")) {
-			console.log(self.addBox[2].box + "won"); 
-		} else if ((self.addBox[0].box === "x" && self.addBox[4].box === "x" && self.addBox[8].box === "x") 
-			|| (self.addBox[0].box === "o" && self.addBox[4].box === "o" && self.addBox[8].box === "o")) {
-			console.log(self.addBox[0].box + "won"); 
-		} else if ((self.addBox[2].box === "x" && self.addBox[4].box === "x" && self.addBox[6].box === "x") 
-			|| (self.addBox[2].box === "o" && self.addBox[4].box === "o" && self.addBox[6].box === "o")) {
-			console.log(self.addBox[2].box + "won"); 
-		}	
-	} 
 
-	//this code block will empty out boxes and restart game once winner is determined.
-	function restart() {
-		for(var i = 0; i < 9; i++) {
-			self.addBox[i].box = "";
-			self.addBox.$save(self.addBox[i]);
+		function getWinner() {
+		// console.log("getWinner function is running")
+		var tokens = ["x", "o"]
+		var winners = [
+		    [0, 1, 2],
+		    [3, 4, 5],
+		    [6, 7, 8],
+		    [0, 3, 6],
+		    [1, 4, 7],
+		    [2, 5, 8],
+		    [0, 4, 8],
+		    [2, 4, 6]
+		]
+
+		for(var i = 0; i < tokens.length; i++) {
+		    var t = tokens[i];
+		    for(var j = 0; j < winners.length; j++) {
+		        var w = winners[j];
+		        // console.log("check for " + t + " as winner on " + w)
+
+		        if (self.letsPlay[ w[0] ].box === t && self.letsPlay[ w[1] ].box === t 
+		        	&& self.letsPlay[ w[2] ].box === t) {
+					console.log(t + " won");
+					winner = t;
+					restart();
+				}
+
+		    }
+
 		}
 
-	}
+	 
+	} 
 	
-	
-} 
+	function restart() {
+		console.log("running")
+			for(var i = 0; i < 9; i++) {
+				self.letsPlay[i].box = "";
+				self.letsPlay.$save(self.letsPlay[i]);
+
+			}
+
+		}
+
+}
