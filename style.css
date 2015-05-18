@@ -1,6 +1,20 @@
+body {
+   background-image: url("images/background.jpg");
+}
 h1 {
-   font-family: tahoma;
-   text-align: center ;
+   font-family: 'Shadows Into Light', cursive;
+   text-align: center;
+   font-size: 50px;
+}
+
+h2 {
+   font-size: 40px;
+   font-weight: bold;
+}
+
+h3 {
+   font-size: 30px;
+   font-weight: bold;
 }
 * {
    box-sizing: border-box;
@@ -8,15 +22,45 @@ h1 {
 
 #container {
    width: 302px;
-   height:    302px;
+   height: 302px;
    margin: 0 auto;
+   border-radius: 50px;
+}
+
+#scoreboard {
+   float: left;
+   font-family: 'Shadows Into Light', cursive;
+   margin-left: 100px;
 }
 
 .box {
-   width:100px;
+   width: 100px;
    height: 100px;
    border: 1px solid black;
    float: left;
    text-align: center;
    font-size: 100px;
+   background-color: white;
+   border-radius: 50px;
 } 
+
+.buttonCorners {
+   border-radius: 50px;
+   border: 2px solid;
+   background-color: #CC3300;
+   padding: 20px;
+   width: 100px;
+   height: 100px;
+   font-family: 'Shadows Into Light', cursive;
+   font-size: 20px;
+   font-weight: bold;
+   margin-left: 100px;
+   margin-top: 30px;
+}
+
+.x {
+   background-image: url("images/llama.jpg");
+}
+.o {
+   background-image: url("images/llama2.jpg");
+}

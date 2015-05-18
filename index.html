@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html ng-app="tttApp">
+<html ng-app="tttApp"  ng-controller="TTTController as tttCtrl">
+
   <head>
     <meta charset="utf-8"> 
     <title>TicTacToe</title>
      <link rel="stylesheet" type="text/css" href="style.css">
+     <link href='http://fonts.googleapis.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css'>
      <script src="angular.js"></script>
      <script type="text/javascript" src="firebase.js"></script>
      <script type="text/javascript" src="angularfire.js"></script>
@@ -11,16 +13,20 @@
      <script src="TTTController.js"></script>
   </head>
   <body>
+
     <h1>Let's Play Tic Tac Toe!</h1>
+      <div id="scoreboard">
 
-      <div id="container" ng-controller="TTTController as tttCtrl">
-        <div ng-repeat="boxes in tttCtrl.letsPlay">
-          <button class="box" ng-class="boxes.box" ng-click="tttCtrl.clickedBox($index)">{{boxes.box}}</button>
-          
+        <h2>Score</h2>
+        <h3>Player 1: {{tttCtrl.table[0].player1score}}</h3>
+        <h3>Player 2: {{tttCtrl.table[0].player2score}}</h3>
+      </div> 
+        <div id="container">
+          <div ng-repeat="boxes in tttCtrl.letsPlay">
+            <button class="box" ng-class="boxes.box" ng-click="tttCtrl.clickedBox($index)">{{boxes.box}}</button>
+          </div>
+          <button class="buttonCorners" type="button" ng-click="tttCtrl.restart()">Restart</button>
+               
         </div>
-        <button type="button" ng-click="tttCtrl.restart()">Restart</button>
-        
-      </div>
-
   </body>
 </html>

@@ -25,7 +25,7 @@ function TTTController($firebaseArray) {
 		var boxes = $firebaseArray(ref);
 		return boxes;
 	}
-//determine
+//determine player's turn, marking box, switching players
 	function clickedBox(c) { 
 		// console.log(self.gameInfo[0].turn)
 		if (self.letsPlay[c].box == '' && self.gameInfo[0].turn == "o") {
@@ -68,6 +68,13 @@ function TTTController($firebaseArray) {
 		        	&& self.letsPlay[ w[2] ].box === t) {
 					console.log(t + " won");
 					winner = t;
+					if (t == "x") {
+						self.table[0].player1score++;
+						self.table.$save(self.table[0]);
+					} else if (t == "o") {
+						self.table[0].player2score++;
+						self.table.$save(self.table[0]);
+					}
 					restart();
 				}
 
@@ -79,13 +86,13 @@ function TTTController($firebaseArray) {
 	} 
 	
 	function restart() {
-		console.log("running")
+		// console.log("running")
 			for(var i = 0; i < 9; i++) {
 				self.letsPlay[i].box = "";
 				self.letsPlay.$save(self.letsPlay[i]);
-
 			}
-
 		}
-
+	function clearScore() {
+		
+	}
 }
