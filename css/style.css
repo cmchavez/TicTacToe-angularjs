@@ -10,7 +10,6 @@ h1 {
 h2 {
    font-size: 40px;
    font-weight: bold;
-   text-decoration: underline;
 }
 
 h3 {
@@ -60,8 +59,8 @@ h3 {
 }
 
 .x {
-   background-image: url("images/llamaX.jpg");
+   background-image: url("images/llama.jpg");
 }
 .o {
-   background-image: url("images/llamaO.jpg");
+   background-image: url("images/llama2.jpg");
 }

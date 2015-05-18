@@ -4,7 +4,7 @@ angular
 
 TTTController.$inject = ['$firebaseArray'];
 
-function TTTController($firebaseArray) {
+	function TTTController($firebaseArray) {
 	var self = this;
     self.gameInfo = gameInfo();
     self.letsPlay = letsPlay();
@@ -25,9 +25,8 @@ function TTTController($firebaseArray) {
 		var boxes = $firebaseArray(ref);
 		return boxes;
 	}
-//determine player's turn, marking box, switching players
+	//determine player's turn, marking box, switching players
 	function clickedBox(c) { 
-		// console.log(self.gameInfo[0].turn)
 		if (self.letsPlay[c].box == '' && self.gameInfo[0].turn == "o") {
 		 	self.letsPlay[c].box = "x";
 		 	self.gameInfo[0].turn = "x";
@@ -43,9 +42,8 @@ function TTTController($firebaseArray) {
 		}  	
 		getWinner()
 	}
-
+		//win logic below
 		function getWinner() {
-		// console.log("getWinner function is running")
 		var tokens = ["x", "o"]
 		var winners = [
 		    [0, 1, 2],
@@ -62,8 +60,7 @@ function TTTController($firebaseArray) {
 		    var t = tokens[i];
 		    for(var j = 0; j < winners.length; j++) {
 		        var w = winners[j];
-		        // console.log("check for " + t + " as winner on " + w)
-
+		        
 		        if (self.letsPlay[ w[0] ].box === t && self.letsPlay[ w[1] ].box === t 
 		        	&& self.letsPlay[ w[2] ].box === t) {
 					console.log(t + " won");
@@ -84,7 +81,7 @@ function TTTController($firebaseArray) {
 
 	 
 	} 
-	
+	//including a button that let's player restart game
 	function restart() {
 		// console.log("running")
 			for(var i = 0; i < 9; i++) {
@@ -92,7 +89,5 @@ function TTTController($firebaseArray) {
 				self.letsPlay.$save(self.letsPlay[i]);
 			}
 		}
-	function clearScore() {
-		
-	}
+
 }
